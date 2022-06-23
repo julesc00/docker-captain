@@ -1,0 +1,28 @@
+version: "3.1"
+
+services:
+  drupal-cms:
+    image: drupal:8-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal-modules:/var/www/html/modules
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+    restart: always
+
+  postgres:
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - data-volume:/var/lib/backup/data
+    restart: always
+
+volumes:
+  data-volume:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
